@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MouseLook : MonoBehaviour
+{
+    public float mouseSensitivity = 1000f;
+
+    public Transform playerBody;
+
+    //for the mouseY, it rotates around the x axis
+    float xRotation = 0f;
+
+    // Start is called before the first frame update
+    void Start()
+    {   
+        //hides cursor and locks it to middle of screen
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        
+        xRotation -= mouseY;
+
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+
+        //for looking left and right
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+}
