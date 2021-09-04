@@ -30,12 +30,16 @@ public class GunBehavior : MonoBehaviour
     //bug fixing
     public bool allowInvoke = true;
 
+    //audio
+    private AudioSource gunShot;
 
     private void Awake()
     {
         //make sure mag is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
+
+        gunShot = GetComponent<AudioSource>();
 
     }
 
@@ -73,6 +77,7 @@ public class GunBehavior : MonoBehaviour
         readyToShoot = false;
 
         muzzleFlash.Play();
+        gunShot.Play();
 
         //Find the exact hit position using a raycast
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
