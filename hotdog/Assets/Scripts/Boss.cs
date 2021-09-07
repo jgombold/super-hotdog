@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Boss : MonoBehaviour
     {   
         transform.LookAt(target);
 
-        if (counter == 100)
+        if (counter == 80)
         {
             Shoot();
             particle.Play();
@@ -31,9 +32,12 @@ public class Boss : MonoBehaviour
         }
         counter++;
 
-        Debug.Log(healthBar.GetValue());
+        //Debug.Log(healthBar.GetValue());
 
-
+        if ( healthBar.GetValue() <= 0)
+        {
+            SceneManager.LoadScene("Win");
+        }
         
     }
 

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth = 10;
     public int currentHealth;
 
     public HealthBar healthBar;
@@ -18,10 +19,15 @@ public class PlayerHealth : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(1);
+        }*/
+
+        if( healthBar.GetValue() <= 0)
+        {
+            SceneManager.LoadScene("End");
         }
         
     }
@@ -32,18 +38,16 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    /*
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.tag == "HeadBullet")
-        {
-            Debug.Log("GOT HIT");
-        }
-    }
+    
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.name);
-    }*/
+        //Debug.Log("PLAYER HIT: " + collision.collider.name);
+        if ( collision.gameObject.tag == "HeadBullet")
+        {
+            TakeDamage(1);
+        }
+        
+    }
 
 }
