@@ -7,6 +7,7 @@ TagManager:
   - HeadBullet
   - testBullet
   - hotdog
+  - Boss
   layers:
   - Default
   - TransparentFX

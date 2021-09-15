@@ -45,7 +45,12 @@ public class GunBehavior : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        //prevent shooting while in pausemenu
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         MyInput();
     }
 

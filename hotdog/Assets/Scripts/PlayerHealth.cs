@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,10 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+    [SerializeField] GameObject damageEffect;
+
+    private float timer;
+    private bool effect;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        effect = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -24,11 +28,20 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(1);
         }*/
-
-        if( healthBar.GetValue() <= 0)
+        if(effect)
         {
-            SceneManager.LoadScene("End");
+            timer += Time.deltaTime;
+            damageEffect.SetActive(effect);
+            if (timer >= .25f)
+            {
+                effect = false;
+                damageEffect.SetActive(effect);
+                timer = 0;
+            }
+            
         }
+        
+
         
     }
 
@@ -36,6 +49,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        effect = true;
+
     }
 
     

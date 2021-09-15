@@ -6,7 +6,6 @@ public class BossMovement : MonoBehaviour
 {
     public Transform cube;
     public float RPM;
-    public bool flipper;
     private float timeKeep;
     
 
@@ -18,12 +17,17 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {   
+
+        if (PauseMenu.GameIsPaused)
+        {
+            return;
+        }
         //Debug.Log(Time.realtimeSinceStartupAsDouble);
         float currentTime = Time.realtimeSinceStartup;
 
         if (currentTime > timeKeep)
         {
-            cube.transform.Rotate(0,RPM * Time.deltaTime * -1, 0);
+            cube.transform.Rotate(0,RPM * Time.fixedDeltaTime * -1, 0);
             float randNum = Random.Range(10f, 30f);
 
             if(currentTime > (timeKeep + randNum) )
@@ -35,7 +39,7 @@ public class BossMovement : MonoBehaviour
         }
         else
         {
-            cube.transform.Rotate(0,RPM * Time.deltaTime, 0);
+            cube.transform.Rotate(0,RPM * Time.fixedDeltaTime, 0);
         }
         
     }

@@ -11,33 +11,25 @@ public class Boss : MonoBehaviour
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private float speed;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private AudioSource pop;
 
-    private int counter;
     
-
     void Start()
     {
-        counter = 0;
-    }
+        InvokeRepeating("Shoot",1f, 1f);
+    }    
 
     void Update()
     {   
         transform.LookAt(target);
-
-        if (counter == 80)
+        
+        if (PauseMenu.GameIsPaused)
         {
-            Shoot();
-            particle.Play();
-            counter = 0;
+            return;
         }
-        counter++;
 
-        //Debug.Log(healthBar.GetValue());
+        
 
-        if ( healthBar.GetValue() <= 0)
-        {
-            SceneManager.LoadScene("Win");
-        }
         
     }
 
@@ -54,7 +46,8 @@ public class Boss : MonoBehaviour
         GameObject currentBullet = Instantiate(bullet, attackPoint.position,Quaternion.identity);
         currentBullet.transform.forward = dir;
         currentBullet.GetComponent<Rigidbody>().AddForce(dir * speed, ForceMode.Impulse);
-       
+        particle.Play();
+        pop.Play();
     }
 
 
