@@ -13,10 +13,12 @@ public class Boss : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private AudioSource pop;
 
+    public float shootInterval;
+    private float timer;
     
     void Start()
     {
-        InvokeRepeating("Shoot",1f, 1f);
+        //InvokeRepeating("Shoot",shootInterval, shootInterval);
     }    
 
     void Update()
@@ -28,8 +30,12 @@ public class Boss : MonoBehaviour
             return;
         }
 
-        
-
+        timer += Time.deltaTime;
+        if ( timer > shootInterval)
+        {
+            Shoot();
+            timer = 0;
+        }
         
     }
 

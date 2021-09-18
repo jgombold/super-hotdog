@@ -22,12 +22,13 @@ public class BossMovement : MonoBehaviour
         {
             return;
         }
+        
         //Debug.Log(Time.realtimeSinceStartupAsDouble);
         float currentTime = Time.realtimeSinceStartup;
 
         if (currentTime > timeKeep)
         {
-            cube.transform.Rotate(0,RPM * Time.fixedDeltaTime * -1, 0);
+            cube.transform.Rotate(0,RPM * Time.deltaTime * -1, 0);
             float randNum = Random.Range(10f, 30f);
 
             if(currentTime > (timeKeep + randNum) )
@@ -39,7 +40,7 @@ public class BossMovement : MonoBehaviour
         }
         else
         {
-            cube.transform.Rotate(0,RPM * Time.fixedDeltaTime, 0);
+            cube.transform.Rotate(0,RPM * Time.deltaTime, 0);
         }
         
     }

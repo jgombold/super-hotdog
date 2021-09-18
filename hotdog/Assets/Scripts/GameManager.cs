@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] HealthBar playerHealthBar;
     [SerializeField] HealthBar bossHealthBar;
     [SerializeField] GameObject meatballs;
+    [SerializeField] BossMovement bossMovement;
+    [SerializeField] Boss bossBehavior;
+    [SerializeField] Transform bossLocation;
+    [SerializeField] ParticleSystem explosion;
+    [SerializeField] GameObject exlposionObject;
+    [SerializeField] GameObject theBoss;
+    [SerializeField] AudioSource explodeSound;
+
     //[SerializeField] GameObject boss;
 
     void Awake()
@@ -33,13 +41,33 @@ public class GameManager : MonoBehaviour
 
         //checks is boss has no more health
         if (bossHealthBar.GetValue() <= 0)
-        {
-            Invoke("ChangeToWin", 2f);
+        {   
+            try {
+                exlposionObject.transform.position = bossLocation.position;
+                Destroy(theBoss);
+                explodeSound.Play();
+                explosion.Play();
+                Invoke("ChangeToWin", 3f);
+            }
+            catch (MissingReferenceException)
+            {
+                
+            }
+            
         }
 
-        if (bossHealthBar.GetValue() <= 750)
+        if (bossHealthBar.GetValue() <= (bossHealthBar.GetMaxValue() * (3/4.0)))
         {
             meatballs.SetActive(true);
+            bossMovement.RPM = 30;
+            bossBehavior.shootInterval = .25f;
+            
+        }
+
+        if (bossHealthBar.GetValue() <= (bossHealthBar.GetMaxValue() * (1/2.0)))
+        {
+            bossBehavior.shootInterval = .125f;
+            bossMovement.RPM = 35;
         }
 
         //Debug.Log("PLAYER HEALTH: " + playerHealthBar.GetValue());

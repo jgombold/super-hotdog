@@ -19,17 +19,23 @@ public class MeatballSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        randNum = Random.Range(0f, 480f);
+       
+       if (PauseMenu.GameIsPaused)
+       {
+           return;
+       }
         
         timer += Time.deltaTime;
+        randNum = Random.Range(0f, 480f);
         if (timer >= randNum)
         {
-            for(int i=0; i < 6; i++)
+            for(int i=0; i < 4; i++)
             {
                 Vector3 randCoords = new Vector3(Random.Range(-25f, 25f), 0, Random.Range(-25f, 25f));
                 Instantiate(meatball, randCoords + originPoint.transform.position, Quaternion.identity);
             }
             timer = 0;
+            //randNum = Random.Range(0f, 30f);
 
         }
     }

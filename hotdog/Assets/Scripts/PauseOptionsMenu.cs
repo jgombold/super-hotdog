@@ -7,6 +7,7 @@ public class PauseOptionsMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer SFXMixer; 
+    public MouseLook mouseSensitivity;
 
     public void SetMusicVolume(float volume)
     {
@@ -17,5 +18,15 @@ public class PauseOptionsMenu : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         SFXMixer.SetFloat("SFXVolume", volume);
+    }
+
+    public void SetFOV(float value)
+    {
+        Camera.main.fieldOfView = value;
+    }
+
+    public void SetMouse(float value)
+    {
+        mouseSensitivity.mouseSensitivity = value;
     }
 }

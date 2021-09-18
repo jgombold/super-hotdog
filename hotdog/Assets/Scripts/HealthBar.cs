@@ -22,4 +22,9 @@ public class HealthBar : MonoBehaviour
     {
         return (int)slider.value;
     }
+
+    public int GetMaxValue()
+    {
+        return (int) slider.maxValue;
+    }
 }
