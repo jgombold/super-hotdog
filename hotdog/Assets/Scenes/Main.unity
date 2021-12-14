@@ -4999,7 +4999,7 @@ GameObject:
   - component: {fileID: 55812287}
   m_Layer: 5
   m_Name: SliderMusic
-  m_TagString: Untagged
+  m_TagString: SliderMusic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8100,7 +8100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2212e6214a1034540a9846e762c294e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 1000
+  mouseSensitivity: 500
   playerBody: {fileID: 340807702}
 --- !u!1 &987645378
 GameObject:
@@ -9418,7 +9418,7 @@ MonoBehaviour:
   m_MinValue: 69
   m_MaxValue: 2000
   m_WholeNumbers: 1
-  m_Value: 1000
+  m_Value: 500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

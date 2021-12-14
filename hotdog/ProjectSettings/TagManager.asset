@@ -8,6 +8,7 @@ TagManager:
   - testBullet
   - hotdog
   - Boss
+  - SliderMusic
   layers:
   - Default
   - TransparentFX

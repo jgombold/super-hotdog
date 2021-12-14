@@ -9,24 +9,42 @@ public class PauseOptionsMenu : MonoBehaviour
     [SerializeField] private AudioMixer SFXMixer; 
     public MouseLook mouseSensitivity;
 
+
+    void Awake()
+    {
+        musicMixer.SetFloat("volume", SettingSaver.musicVolume);
+        SFXMixer.SetFloat("SFXVolume", SettingSaver.SFXVolume);
+        Camera.main.fieldOfView = SettingSaver.FOVvalue;
+        mouseSensitivity.mouseSensitivity = SettingSaver.mouseValue;
+
+    }
+
     public void SetMusicVolume(float volume)
     {
         //Debug.Log(volume);
-        musicMixer.SetFloat("volume", volume);
+        SettingSaver.musicVolume = volume;
+        musicMixer.SetFloat("volume", SettingSaver.musicVolume);
+
+
+
+        //musicMixer.SetFloat("volume", volume);
     }
 
     public void SetSFXVolume(float volume)
     {
-        SFXMixer.SetFloat("SFXVolume", volume);
+        SettingSaver.SFXVolume = volume;
+        SFXMixer.SetFloat("SFXVolume", SettingSaver.SFXVolume);
     }
 
     public void SetFOV(float value)
     {
-        Camera.main.fieldOfView = value;
+        SettingSaver.FOVvalue = value;
+        Camera.main.fieldOfView = SettingSaver.FOVvalue;
     }
 
     public void SetMouse(float value)
-    {
-        mouseSensitivity.mouseSensitivity = value;
+    {   
+        SettingSaver.mouseValue = value;
+        mouseSensitivity.mouseSensitivity = SettingSaver.mouseValue;
     }
 }
